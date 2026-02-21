@@ -14,7 +14,7 @@ Plugin 'VundleVim/Vundle.vim'
 " Keep Plugin commands between vundle#begin/end.
 " plugin on GitHub repo
 Plugin 'ervandew/supertab'
-Plugin 'Valloric/YouCompleteMe'
+Plugin 'Exafunction/codeium.vim'
 Plugin 'Shougo/neocomplete'
 Plugin 'tpope/vim-fugitive'
 Plugin 'SirVer/ultisnips'
@@ -36,7 +36,7 @@ Plugin 'tpope/vim-unimpaired'
 Plugin 'vim-scripts/vim-auto-save'
 Plugin 'tpope/vim-surround'
 Plugin 'chriskempson/base16-vim'
-Plugin 'claude.vim'
+Plugin 'greggh/claude.vim'
 "Plugin 'LaTeX-Box-Team/LaTeX-Box'
 
 " All of your Plugins must be added before the following line
@@ -88,6 +88,10 @@ nmap <silent> <c-l> :wincmd l<CR>
  let g:neocomplete#sources#syntax#min_keyword_length = 3
  inoremap <expr><C-n>  neocomplete#start_manual_complete()
  let g:SuperTabDefaultCompletionType = '<C-n>'
+
+ " Codeium
+ let g:codeium_disable_bindings = 1
+ imap <script><expr> <C-g> codeium#Accept()
 
  "" better key bindings for UltiSnipsExpandTrigger
  let g:UltiSnipsExpandTrigger = "<tab>"
