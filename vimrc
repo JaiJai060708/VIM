@@ -36,6 +36,7 @@ Plugin 'tpope/vim-unimpaired'
 Plugin 'vim-scripts/vim-auto-save'
 Plugin 'tpope/vim-surround'
 Plugin 'chriskempson/base16-vim'
+Plugin 'claude.vim'
 "Plugin 'LaTeX-Box-Team/LaTeX-Box'
 
 " All of your Plugins must be added before the following line
