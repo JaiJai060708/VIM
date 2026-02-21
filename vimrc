@@ -19,19 +19,19 @@ Plugin 'Shougo/neocomplete'
 Plugin 'tpope/vim-fugitive'
 Plugin 'SirVer/ultisnips'
 Plugin 'honza/vim-snippets'
-Plugin 'scrooloose/nerdtree'
-Plugin 'scrooloose/nerdcommenter'
-Plugin 'kien/ctrlp.vim'
+Plugin 'preservim/nerdtree'
+Plugin 'preservim/nerdcommenter'
+Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'bling/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
 Plugin 'Yggdroot/indentLine'
 Plugin 'mileszs/ack.vim'
-Plugin 'majutsushi/tagbar'
+Plugin 'preservim/tagbar'
 Plugin 'jiangmiao/auto-pairs'
 "Plugin 'klen/python-mode'
 Plugin 'pangloss/vim-javascript'
 Plugin 'easymotion/vim-easymotion'
-Plugin 'scrooloose/syntastic'
+Plugin 'vim-syntastic/syntastic'
 Plugin 'tpope/vim-unimpaired'
 Plugin 'vim-scripts/vim-auto-save'
 Plugin 'tpope/vim-surround'
@@ -95,16 +95,19 @@ nmap <silent> <c-l> :wincmd l<CR>
  let g:UltiSnipsJumpBackwardTrigger = "<s-tab>"
  let g:UltiSnipsSnippetsDir = "~/.vim/bundle/vim-snippets/UltiSnips"
 
- "" Filetype indent
-autocmd FileType html setlocal expandtab shiftwidth=2 tabstop=2
-autocmd FileType javascript setlocal expandtab shiftwidth=2 softtabstop=2
-autocmd FileType python setlocal expandtab shiftwidth=4 softtabstop=4
+"" Filetype indent
+augroup vimrc_filetype_indent
+  autocmd!
+  autocmd FileType html setlocal expandtab shiftwidth=2 tabstop=2
+  autocmd FileType javascript setlocal expandtab shiftwidth=2 softtabstop=2
+  autocmd FileType python setlocal expandtab shiftwidth=4 softtabstop=4
+augroup END
 
 "" NerdTree
 map <C-\> :NERDTreeToggle<CR>
 let NERDTreeIgnore = ['\.pyc$']
 " close nerdtree with q
-autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
+autocmd BufEnter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
 let NERDTreeShowBookmarks=1
 let NERDTreeChDirMode=2
 highlight Directory ctermfg=cyan
@@ -142,8 +145,11 @@ map <C-f> :PymodeLintAuto<CR>
 "let g:pymode_rope_extract_method_bind = '<leader>rm'
 
 " close scratch automatically
- autocmd CursorMovedI * if pumvisible() == 0|pclose|endif
- autocmd InsertLeave * if pumvisible() == 0|pclose|endif
+augroup vimrc_pum_close
+  autocmd!
+  autocmd CursorMovedI * if pumvisible() == 0 | pclose | endif
+  autocmd InsertLeave * if pumvisible() == 0 | pclose | endif
+augroup END
 
 " syntastic settings
 "
@@ -207,4 +213,6 @@ set tags=./tags;/
 nmap <Leader>t :TagbarToggle<CR>
 
 
-execute pathogen#infect()
+if exists('*pathogen#infect')
+  execute pathogen#infect()
+endif
