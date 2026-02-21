@@ -128,6 +128,21 @@ install_plugins() {
     log "vim binary not found in PATH after installation."
     return 1
   fi
+
+  if [[ -d ~/.vim/bundle/YouCompleteMe ]]; then
+    if command -v python3 >/dev/null 2>&1; then
+      (
+        cd ~/.vim/bundle/YouCompleteMe
+        python3 install.py --all
+      )
+    else
+      log "python3 is required to build YouCompleteMe. Install python3 and run: cd ~/.vim/bundle/YouCompleteMe && python3 install.py --all"
+      return 1
+    fi
+  else
+    log "YouCompleteMe plugin directory was not found at ~/.vim/bundle/YouCompleteMe"
+    return 1
+  fi
 }
 
 log "Installing/updating Vim and required tools (git, curl, ctags)..."
